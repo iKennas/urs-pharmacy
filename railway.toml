@@ -1,0 +1,9 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "npm --prefix backend ci && npm --prefix backend exec prisma generate && npm --prefix backend run build"
+
+[deploy]
+startCommand = "node backend/dist/src/main.js"
+preDeployCommand = "chmod +x ./backend/railway/init-app.sh && cd backend && ./railway/init-app.sh"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
