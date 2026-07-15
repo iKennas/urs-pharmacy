@@ -1,26 +1,37 @@
 # URS Pharmacy — Client Demo Deployment
 
-Same stack as the accounting demo (`copies/accounting`): Cloudflare Pages (frontend) + Railway (API + Postgres).
+Same stack idea as the accounting demo: **static frontend** + **Railway** (API + Postgres).
 
-| Piece | Where | Cost |
+| Piece | Where | URL |
 |-------|-------|------|
-| Frontend | Cloudflare Pages | Free |
-| Backend + DB | Railway | Trial credit, then ~$5/mo Hobby |
+| Frontend (primary) | Firebase Hosting (free) | https://kennas0023.web.app |
+| Frontend (also) | Cloudflare Pages (free) | https://urs-pharmacy.pages.dev |
+| Backend + DB | Railway (trial → ~$5/mo) | https://backend-production-f186.up.railway.app |
 
-## How deploys work
+## What the client opens
 
-1. **Backend** — Railway watches `main` on GitHub. Root directory = `backend`. On deploy: build → `prisma db push` + seed → `node dist/main.js`.
-2. **Frontend** — GitHub Action builds `prototype/` and deploys to Cloudflare Pages project `urs-pharmacy`, or deploy locally with wrangler.
-
-## Demo logins (after seed)
+Send them: **https://kennas0023.web.app**
 
 | Role | Email | Password |
 |------|-------|----------|
 | Platform Super Admin | `admin@urs-platform.sa` | `AdminPass123!` |
 | Pharmacy GM | `a.harbi@urs-pharma.sa` | `Password123!` |
 
-## Env
+## How deploys work
 
-**Railway (backend):** `DATABASE_URL` (from Postgres plugin), `JWT_SECRET`, `JWT_EXPIRES_IN=8h`
+1. **Backend** — Railway project `urs-pharmacy`, GitHub `iKennas/urs-pharmacy`. `railway up` or push to `main` rebuilds; preDeploy runs `prisma db push` + seed.
+2. **Frontend** — rebuild with API URL then deploy:
+   ```bash
+   cd prototype
+   set VITE_API_URL=https://backend-production-f186.up.railway.app/api
+   npm run build
+   npx firebase deploy --only hosting --project prototype-kennas
+   # optional also:
+   npx wrangler pages deploy dist --project-name=urs-pharmacy
+   ```
 
-**Cloudflare / GitHub Actions:** `VITE_API_URL=https://<railway-public-url>/api`
+## Env (already set)
+
+**Railway backend:** `DATABASE_URL` (from Postgres), `JWT_SECRET`, `JWT_EXPIRES_IN=8h`
+
+**Frontend build:** `VITE_API_URL=https://backend-production-f186.up.railway.app/api`
