@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "prototype-kennas"
+  },
+  "targets": {
+    "prototype-kennas": {
+      "hosting": {
+        "kennas0023": [
+          "kennas0023"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

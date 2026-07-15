@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --urs-green-dark: #284e22;
+  --urs-green: #376a2f;
+  --urs-green-light: #5bb14e;
+  --urs-green-lighter: #eaf8e7;
+  --urs-orange: #f2892b;
+  --urs-orange-light: #fdf1e4;
+  --urs-ink: #14231b;
+  --urs-bg: #f5f7f6;
+  --urs-border: #e4e9e6;
+}
+
+@theme {
+  --font-sans: "Cairo", "Tajawal", system-ui, sans-serif;
+  --color-urs-green-dark: #284e22;
+  --color-urs-green: #376a2f;
+  --color-urs-green-light: #5bb14e;
+  --color-urs-green-lighter: #eaf8e7;
+  --color-urs-orange: #f2892b;
+  --color-urs-orange-light: #fdf1e4;
+  --color-urs-ink: #14231b;
+  --color-urs-bg: #f5f7f6;
+  --color-urs-border: #e4e9e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--urs-bg);
+  color: var(--urs-ink);
+  font-family: "Cairo", "Tajawal", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9d4cd;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
