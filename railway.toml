@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "npm --prefix backend ci && npm --prefix backend exec prisma generate && npm --prefix backend run build"
+buildCommand = "cd backend && npm ci && npx prisma generate && npm run build"
 
 [deploy]
 startCommand = "node backend/dist/src/main.js"
